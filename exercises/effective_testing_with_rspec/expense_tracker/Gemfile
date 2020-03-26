@@ -1,0 +1,17 @@
+source 'https://rubygems.org'
+
+git_source(:github) do |repo_name|
+  "https://github.com/#{repo_name}"
+end
+
+gem 'ox'
+gem 'sequel'
+gem 'sinatra'
+gem 'sqlite3'
+
+group :test, :development do
+  gem 'coderay'
+  gem 'fivemat'
+  gem 'rack-test'
+  gem 'rspec'
+end
