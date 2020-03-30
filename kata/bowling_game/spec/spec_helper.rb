@@ -2,6 +2,12 @@
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  # Default behaviour for acceptance specs should be to aggregate failures,
+  # as they usually have multiple expectations by design.
+  config.define_derived_metadata(file_path: %r{/spec/acceptance/}) do |meta|
+    meta[:aggregate_failures] = true
+  end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
