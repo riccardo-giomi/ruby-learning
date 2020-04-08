@@ -19,11 +19,11 @@ class AboutClassMethods < Neo::Koan
 
   def test_objects_have_methods
     fido = Dog.new
-    assert fido.methods.size > 59
+    assert fido.methods.size > 0
   end
 
   def test_classes_have_methods
-    assert Dog.methods.size > 113
+    assert Dog.methods.size > 0
   end
 
   def test_you_can_define_methods_on_individual_objects
@@ -158,6 +158,17 @@ class AboutClassMethods < Neo::Koan
   #
   # Which do you prefer and why?
   # Are there times you might prefer one over the other?
+  
+  # The first one is the one I use more, probably only because it is similar
+  # to a static method construction in other languages, and I'm not used to the first form yet.
+  # 
+  # Grouping and "sandwiching" the class methods would seem better to keep them together visibly
+  # distinguishing them from instance methods, but with too many of them (especially in
+  # a class that has private methods as well) it could be less immediate to look at a method and
+  # know if it is a class one or not.
+  #
+  # In that situation, or if we want to mix class and instance methods, using the first method would
+  # be more correct.
 
   # ------------------------------------------------------------------
 

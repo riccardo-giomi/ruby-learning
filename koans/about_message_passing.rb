@@ -24,8 +24,8 @@ class AboutMessagePassing < Neo::Koan
     mc = MessageCatcher.new
 
     assert mc.send("caught?")
-    assert mc.send("caught" + "?")    # What do you need to add to the first string?
-    assert mc.send("CAUGHT?".downcase)      # What would you need to do to the string?
+    assert mc.send("caught" + "?")     # What do you need to add to the first string?
+    assert mc.send("CAUGHT?".downcase) # What would you need to do to the string?
   end
 
   def test_send_with_underscores_will_also_send_messages
@@ -36,6 +36,8 @@ class AboutMessagePassing < Neo::Koan
     # THINK ABOUT IT:
     #
     # Why does Ruby provide both send and __send__ ?
+
+    # So that send can be customized if needed.
   end
 
   def test_classes_can_be_asked_if_they_know_how_to_respond
@@ -123,7 +125,7 @@ class AboutMessagePassing < Neo::Koan
 
     assert_equal "Someone called foobar with <>", catcher.foobar
     assert_equal "Someone called foobaz with <1>", catcher.foobaz(1)
-    assert_equal "Someone called sum with <1, 2, 3, 4, 5, 6>",  catcher.sum(1, 2, 3, 4, 5, 6)
+    assert_equal "Someone called sum with <1, 2, 3, 4, 5, 6>", catcher.sum(1,2,3,4,5,6)
   end
 
   def test_catching_messages_makes_respond_to_lie

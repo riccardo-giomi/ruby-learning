@@ -47,8 +47,8 @@ class AboutArrays < Neo::Koan
   def test_arrays_and_ranges
     assert_equal Range, (1..5).class
     assert_not_equal [1,2,3,4,5], (1..5)
-    assert_equal [1, 2, 3, 4, 5],  (1..5).to_a
-    assert_equal [1, 2, 3, 4],  (1...5).to_a
+    assert_equal [1,2,3,4,5], (1..5).to_a
+    assert_equal [1,2,3,4], (1...5).to_a
   end
 
   def test_slicing_with_ranges
@@ -63,7 +63,7 @@ class AboutArrays < Neo::Koan
     array = [1,2]
     array.push(:last)
 
-    assert_equal  [1, 2, :last], array
+    assert_equal [1, 2, :last], array
 
     popped_value = array.pop
     assert_equal :last, popped_value

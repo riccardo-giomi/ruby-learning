@@ -124,6 +124,9 @@ class AboutClasses < Neo::Koan
     end
     # THINK ABOUT IT:
     # Why is this so?
+
+    # Because new in turns internally calls initialize with the same arguments
+    # with which it is called.
   end
 
   def test_different_objects_have_different_instance_variables
@@ -169,12 +172,13 @@ class AboutClasses < Neo::Koan
 
   def test_to_s_is_used_in_string_interpolation
     fido = Dog7.new("Fido")
-    assert_equal  "My dog is Fido.", "My dog is #{fido}."
+    assert_equal 'My dog is Fido', "My dog is #{fido}"
   end
 
   def test_inspect_provides_a_more_complete_string_version
     fido = Dog7.new("Fido")
     assert_equal "<Dog named 'Fido'>", fido.inspect
+
   end
 
   def test_all_objects_support_to_s_and_inspect
@@ -184,7 +188,7 @@ class AboutClasses < Neo::Koan
     assert_equal "[1, 2, 3]", array.inspect
 
     assert_equal "STRING", "STRING".to_s
-    assert_equal %{"STRING"}, "STRING".inspect
+    assert_equal "\"STRING\"", "STRING".inspect
   end
 
 end

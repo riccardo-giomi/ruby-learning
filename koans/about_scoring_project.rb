@@ -29,17 +29,18 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 #
 # Your goal is to write the score method.
 
-# Note: not extendable automatically to more than 5 dice, but boy this is beautiful...
+# I like this method too much, from here:
+# https://stackoverflow.com/questions/4749973/ruby-greed-koan-how-can-i-improve-my-if-then-soup
 def score(dice)
-  score = [0, 100, 200, 1000, 1100, 1200][dice.count(1)]
-  score += [0, 50, 100, 500, 550, 600][dice.count(5)]
-  [2,3,4,6].each do |num|
-      if dice.count(num) >= 3 then score += num * 100 end
+  score  = [0, 100, 200, 1000, 1100, 1200][dice.count(1)]
+  score += [0,  50, 100,  500,  550,  600][dice.count(5)]
+
+  [2,3,4,6].each do |n|
+    score += n * 100 if dice.count(n) >= 3
   end
+
   score
 end
-
-class DiceError < StandardError; end
 
 class AboutScoringProject < Neo::Koan
   def test_score_of_an_empty_list_is_zero

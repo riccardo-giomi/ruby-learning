@@ -33,6 +33,12 @@ class AboutNil < Neo::Koan
     # or
     #    obj == nil
     # Why?
+
+    # obj.nil? would be the better choice: should we ever need a custom "nil-like" object,
+    # as long as nil is tested the first way consistently in the rest of the code,
+    # all we would need would be to redefine nil? for our object.
+    # In theory we could also want nil to not behave like nil anymore and we would be able to do it.
+    # I can't think of any reason to do that, but still.
   end
 
 end

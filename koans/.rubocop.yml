@@ -1,0 +1,4 @@
+# Disable Rubocop for the koans, as the quickest way to avoid auto-corrections.
+
+AllCops:
+  DisabledByDefault: true

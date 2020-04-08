@@ -33,6 +33,8 @@ class AboutRegularExpressions < Neo::Koan
     # THINK ABOUT IT:
     #
     # When would * fail to match?
+
+    # Never.
   end
 
   # THINK ABOUT IT:
@@ -40,6 +42,11 @@ class AboutRegularExpressions < Neo::Koan
   # We say that the repetition operators above are "greedy."
   #
   # Why?
+
+  # Because they will return the longest match possible:
+  # in "abbb"[/ab*/], "a", "ab", "abb" and "abbb" are all technically solutions
+  # for "an 'a' followed by zero or more 'b's". A greedy operator is such that
+  # it will return "abbb" as the result.
 
   # ------------------------------------------------------------------
 
@@ -82,7 +89,7 @@ class AboutRegularExpressions < Neo::Koan
   end
 
   def test_shortcut_character_classes_are_negated_with_capitals
-    assert_equal  "the number is ", "the number is 42"[/\D+/]
+    assert_equal "the number is ", "the number is 42"[/\D+/]
     assert_equal "space:", "space: \t\n"[/\S+/]
     # ... a programmer would most likely do
     assert_equal " = ", "variable_1 = 42"[/[^a-zA-Z0-9_]+/]
@@ -145,6 +152,9 @@ class AboutRegularExpressions < Neo::Koan
   #
   # Explain the difference between a character class ([...]) and alternation (|).
 
+  # Character classes are like a _or_ operator for characters, while the alternation
+  # operator is like an _or_ for strings.
+
   # ------------------------------------------------------------------
 
   def test_scan_is_like_find_all
@@ -152,10 +162,10 @@ class AboutRegularExpressions < Neo::Koan
   end
 
   def test_sub_is_like_find_and_replace
-    assert_equal  "one t-three", "one two-three".sub(/(t\w*)/) { $1[0, 1] }
+    assert_equal "one t-three", "one two-three".sub(/(t\w*)/) { $1[0, 1] }
   end
 
   def test_gsub_is_like_find_and_replace_all
-    assert_equal  "one t-t", "one two-three".gsub(/(t\w*)/) { $1[0, 1] }
+    assert_equal "one t-t", "one two-three".gsub(/(t\w*)/) { $1[0, 1] }
   end
 end

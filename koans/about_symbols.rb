@@ -11,7 +11,7 @@ class AboutSymbols < Neo::Koan
     symbol2 = :a_symbol
     symbol3 = :something_else
 
-    assert_equal true, symbol1 == symbol2
+    assert_equal true,  symbol1 == symbol2
     assert_equal false, symbol1 == symbol3
   end
 
@@ -32,6 +32,10 @@ class AboutSymbols < Neo::Koan
   #
   # Why do we convert the list of symbols to strings and then compare
   # against the string value rather than against symbols?
+
+  # The way the symbols space works, the symbol we use in the test in the #include?
+  # call would be added to the symbol list before the method is actually called, 
+  # causing #include? to always return true.
 
   in_ruby_version("mri") do
     RubyConstant = "What is the sound of one hand clapping?"
@@ -97,4 +101,9 @@ class AboutSymbols < Neo::Koan
   # THINK ABOUT IT:
   #
   # Why is it not a good idea to dynamically create a lot of symbols?
+
+  # Symbols are not garbage collected and the memory they occupy
+  # is never freed until the application ends.
+  # If we are generating a lot of symbols dynamically we are clogging
+  # the memory with elements when chances are we will not use all of them.
 end

@@ -77,6 +77,9 @@ class AboutInheritance < Neo::Koan
 
   def test_super_does_not_work_cross_method
     george = GreatDane.new("George")
+    # From the error we can see that `super` is taken as calling `growl` from the parent class, 
+    # so super.bark really means "call growl on parent and then bark on the result of this".
+    # Adding a #growl method to Dog that returns something that responds to #bark would work, for example.
     assert_raise(NoMethodError) do
       george.growl
     end

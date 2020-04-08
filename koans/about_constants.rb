@@ -1,23 +1,22 @@
-# frozen_string_literal: true
-
 require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-C = 'top level'
+C = "top level"
 
 class AboutConstants < Neo::Koan
-  C = 'nested'
+
+  C = "nested"
 
   def test_nested_constants_may_also_be_referenced_with_relative_paths
-    assert_equal 'nested', C
+    assert_equal "nested", C
   end
 
   def test_top_level_constants_are_referenced_by_double_colons
-    assert_equal 'top level', ::C
+    assert_equal "top level", ::C
   end
 
   def test_nested_constants_are_referenced_by_their_complete_path
-    assert_equal 'nested', AboutConstants::C
-    assert_equal 'nested', ::AboutConstants::C
+    assert_equal "nested", AboutConstants::C
+    assert_equal "nested", ::AboutConstants::C
   end
 
   # ------------------------------------------------------------------
@@ -70,6 +69,7 @@ class AboutConstants < Neo::Koan
   # QUESTION: Which has precedence: The constant in the lexical scope,
   # or the constant from the inheritance hierarchy?
 
+  # The lexical scope has precedence, as the example indicates.
   # ------------------------------------------------------------------
 
   class MyAnimals::Oyster < Animal
@@ -85,4 +85,11 @@ class AboutConstants < Neo::Koan
   # QUESTION: Now which has precedence: The constant in the lexical
   # scope, or the constant from the inheritance hierarchy?  Why is it
   # different than the previous answer?
+
+  # The way MyAnimals::Oyster is written, it defines Oyster as _namespaced_ in MyAnimals.
+  # This is different than _nesting_ it, which is what the `module MyAnimals; module Oyster`
+  # form does.
+  # These two ways of writing the class declaration are actually different.
+  # In particular, when looking up a constant, Ruby will consider only the nesting information
+  # for that constant, that's why MyAnimals.LEGS is not found.
 end

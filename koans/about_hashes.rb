@@ -30,6 +30,10 @@ class AboutHashes < Neo::Koan
     # THINK ABOUT IT:
     #
     # Why might you want to use #fetch instead of #[] when accessing hash keys?
+
+    # Sometimes it is more desirable, or unavoidable, to expect an exception
+    # when a given key has no corresponding value in a hash and handle the
+    # situation in a rescue block.
   end
 
   def test_changing_hashes
@@ -41,17 +45,18 @@ class AboutHashes < Neo::Koan
 
     # Bonus Question: Why was "expected" broken out into a variable
     # rather than used as a literal?
+
+    # Using the literal directly as parameter would require parenthesis,
+    # otherwise Ruby would assume that the curly brackets indicate a block as a parameter
+    # raising an error.
+    # The koans try to keep the assert lines more more similar to sentences that functions
+    # so this way of writing the test is more in line with the overall style.
   end
 
   def test_hash_is_unordered
     hash1 = { :one => "uno", :two => "dos" }
     hash2 = { :two => "dos", :one => "uno" }
 
-    assert_equal true, hash1 == hash2
-  end
-
-  def test_hash_keys
-    hash = { :one => "uno", :two => "dos" }
     assert_equal true, hash1 == hash2
   end
 

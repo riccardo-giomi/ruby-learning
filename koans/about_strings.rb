@@ -12,8 +12,8 @@ class AboutStrings < Neo::Koan
   end
 
   def test_use_single_quotes_to_create_string_with_double_quotes
-    string = 'He said, "Go Away.".'
-    assert_equal "He said, \"Go Away.\".", string
+    string = 'He said, "Go Away."'
+    assert_equal  "He said, \"Go Away.\"", string
   end
 
   def test_use_double_quotes_to_create_strings_with_single_quotes
@@ -40,7 +40,6 @@ class AboutStrings < Neo::Koan
 It was the best of times,
 It was the worst of times.
 }
-
     assert_equal 54, long_string.length
     assert_equal 3, long_string.lines.count
     assert_equal "\n", long_string[0,1]
@@ -73,7 +72,7 @@ EOS
     hi = "Hello, "
     there = "World"
     hi += there
-    assert_equal "Hello, World" , hi
+    assert_equal "Hello, World", hi
   end
 
   def test_plus_equals_also_will_leave_the_original_string_unmodified
@@ -103,6 +102,10 @@ EOS
     #
     # Ruby programmers tend to favor the shovel operator (<<) over the
     # plus equals operator (+=) when building up strings.  Why?
+
+    # The shovel operator does not create a new copy of the original variable,
+    # since when building up strings we don't need their previous versions,
+    # this way is (slightly) more efficient and feels cleaner.
   end
 
   def test_double_quoted_string_interpret_escape_characters
@@ -130,12 +133,12 @@ EOS
   def test_single_quoted_strings_do_not_interpolate
     value = 123
     string = 'The value is #{value}'
-    assert_equal  'The value is #{value}', string
+    assert_equal  "The value is \#{value}", string
   end
 
   def test_any_ruby_expression_may_be_interpolated
     string = "The square root of 5 is #{Math.sqrt(5)}"
-    assert_equal "The square root of 5 is 2.23606797749979", string
+    assert_equal  "The square root of 5 is " + Math.sqrt(5).to_s, string
   end
 
   def test_you_can_get_a_substring_from_a_string
@@ -149,6 +152,8 @@ EOS
     assert_equal "a", string[1]
 
     # Surprised?
+    
+    # Nope.
   end
 
   in_ruby_version("1.8") do

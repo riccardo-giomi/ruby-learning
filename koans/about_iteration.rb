@@ -85,10 +85,13 @@ class AboutIteration < Neo::Koan
     assert_equal 9, result
 
     result2 = [2, 3, 4].inject(1) { |product, item| product * item }
-    assert_equal 24, result2
+    assert_equal 2 * 3 * 4, result2
 
     # Extra Credit:
     # Describe in your own words what inject does.
+
+    # Seriously, the Ruby documentation has the best explanation, go RTFM :P...
+    # https://ruby-doc.org/core-2.7.1/Enumerable.html#method-i-inject
   end
 
   def test_all_iteration_methods_work_on_any_collection_not_just_arrays
@@ -119,4 +122,8 @@ class AboutIteration < Neo::Koan
   #
   # When you get to the "AboutSandwichCode" koan, recheck your answer.
 
+  # Mainly I'd say it was for:
+  # 1. readability: blocks visually isolate the part of code that deals with the file-reading operation;
+  # 2. safety and quality of life: File.open automatically closes the connection to the file at the end of the block,
+  #    while in the second example we would have to explicitly use File.close, and possibly forget.
 end

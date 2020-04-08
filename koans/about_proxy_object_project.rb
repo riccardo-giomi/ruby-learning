@@ -14,35 +14,30 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 class Proxy
   attr_reader :messages
-
   def initialize(target_object)
-    @object   = target_object
-    @messages = Hash.new(0)
+    @object = target_object
+    @messages = []
   end
 
-  def called?(method_name)
-    @messages[method_name] > 0
-  end
-
-  def messages
-    @messages.keys
+  def called?(message)
+    @messages.include?(message)
   end
 
   def number_of_times_called(method_name)
-    @messages[method_name]
-  end
-
-  def respond_to?(method_name)
-    self.respond_to?(method_name) or @object.respond_to?(method_name)
+    @messages.count(method_name)
   end
 
   def method_missing(method_name, *args, &block)
-    if @object.respond_to? method_name
-      @messages[method_name] += 1
-      @object.__send__ method_name, *args, &block
+    if @object.respond_to?(method_name)
+      messages << method_name
+      @object.send(method_name, *args, &block)
     else
-      super method_name, *args, &block
+      super(method_name, *args, &block)
     end
+  end
+
+  def respond_to?(method_name)
+    super(method_name) || @object.respond_to?(method_name)
   end
 end
 
@@ -50,7 +45,7 @@ end
 #
 class AboutProxyObjectProject < Neo::Koan
   def test_proxy_method_returns_wrapped_object
-    # NOTE: The Television class is defined below
+    # NOTE: the Television class is defined below
     tv = Proxy.new(Television.new)
 
     # HINT: Proxy class is defined above, may need tweaking...

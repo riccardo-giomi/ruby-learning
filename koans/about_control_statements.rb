@@ -46,7 +46,7 @@ class AboutControlStatements < Neo::Koan
   end
 
   def test_condition_operators
-    assert_equal :true_value, (true ? :true_value : :false_value)
+    assert_equal :true_value,  (true ? :true_value : :false_value)
     assert_equal :false_value, (false ? :true_value : :false_value)
   end
 
@@ -87,7 +87,7 @@ class AboutControlStatements < Neo::Koan
       result = result * i
       i += 1
     end
-    assert_equal 3628800, result
+    assert_equal 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10, result
   end
 
   def test_break_statement
@@ -98,7 +98,7 @@ class AboutControlStatements < Neo::Koan
       result = result * i
       i += 1
     end
-    assert_equal 3628800, result
+    assert_equal 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10, result
   end
 
   def test_break_statement_returns_values

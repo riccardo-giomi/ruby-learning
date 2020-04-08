@@ -71,9 +71,6 @@ class AboutBlocks < Neo::Koan
     assert_equal 11, add_one.call(10)
 
     # Alternative calling syntax
-    assert_equal 11, add_one.(10)
-
-    # Alternative-alternative calling syntax
     assert_equal 11, add_one[10]
   end
 

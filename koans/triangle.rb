@@ -13,14 +13,21 @@
 # and
 #   about_triangle_project_2.rb
 #
-def triangle(a, b, c)
-  a, b, c = [a, b, c].sort
-  raise  TriangleError if a <= 0 or a + b <= c
-  return :equilateral  if a == c
-  return :isosceles    if a == b or b == c
-  return :scalene
-end
 
+# I loved this solution from
+# http://stackoverflow.com/questions/3834203/ruby-koan-151-raising-exceptions.
+def triangle(a, b, c)
+  x, y, z = [a, b, c].sort
+
+  # All sides must be positive,
+  # if the smallest side is then the other will be as well.
+  raise TriangleError if x <= 0
+  # The sum of any 2 sides must be longer than the 3rd side.
+  # If it's true for the 2 smaller sides than it for the other combinations as well.
+  raise TriangleError if x + y <= z
+
+  [:equilateral, :isosceles, :scalene].fetch([a, b, c].uniq.size - 1)
+end
 # Error class used in part 2.  No need to change this code.
 class TriangleError < StandardError
 end
