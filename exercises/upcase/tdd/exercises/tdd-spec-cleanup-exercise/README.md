@@ -3,4 +3,4 @@
 I've kept only the relevant parts of the exercise from the entire Rails app.
 
 The app for the exercise can be found
-[here](https://github.com/thoughtbot-upcase-exercises/tdd-spec-cleanup-exercise/blob/master/spec/models/invitation_spec.rb).
+[here](https://github.com/thoughtbot-upcase-exercises/tdd-spec-cleanup-exercise).
