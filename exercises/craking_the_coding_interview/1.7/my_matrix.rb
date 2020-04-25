@@ -9,32 +9,27 @@ class MyMatrix
   alias_method :to_ary, :matrix
 
   def rotate_right
-    max_col = max_row = n / 2
-    max_col += 1 if n.odd?
-
-    for row in 0...max_row do
-      for col in 0...max_col do
-        middle = n.odd? && col == row && row == max_row
-        rotate_four_right(row, col) unless middle
-      end
-    end
-    @matrix
+    rotate do |row, col| rotate_four_right(row, col) end
   end
 
   def rotate_left
+    rotate do |row, col| rotate_four_left(row, col) end
+  end
+
+  private
+
+  def rotate(&block)
     max_col = max_row = n / 2
     max_col += 1 if n.odd?
 
     for row in 0...max_row do
       for col in 0...max_col do
         middle = n.odd? && col == row && row == max_row
-        rotate_four_left(row, col) unless middle
+        block.call(row, col) unless middle
       end
     end
     @matrix
   end
-  
-  private
 
   def rotate_four_right(row, col)
     value = at(row, col)                  # starting point:
