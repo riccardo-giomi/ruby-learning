@@ -2,8 +2,8 @@
 
 RSpec.shared_examples '90 degrees left rotation' do
 
-  def create(matrix)
-    described_class.new(matrix)
+  def rotated_left(matrix)
+    described_class.new(matrix).rotate_left.to_a
   end
 
   it 'correctly rotates a 2 by 2 matrix' do
@@ -13,7 +13,7 @@ RSpec.shared_examples '90 degrees left rotation' do
     rotated = [[2, 4],
                [1, 3]]
 
-    expect(create(matrix).rotate_left).to eq rotated
+    expect(rotated_left(matrix)).to eq rotated
   end
 
   it 'correctly rotates a different 2 by 2 matrix' do
@@ -23,7 +23,7 @@ RSpec.shared_examples '90 degrees left rotation' do
     rotated = [['B', 'D'],
                ['A', 'C']]
 
-    expect(create(matrix).rotate_left).to eq rotated
+    expect(rotated_left(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 3 by 3 matrix' do
@@ -35,7 +35,7 @@ RSpec.shared_examples '90 degrees left rotation' do
                [2, 5, 8],
                [1, 4, 7]]
 
-    expect(create(matrix).rotate_left).to eq rotated
+    expect(rotated_left(matrix)).to eq rotated
   end
 
   it 'correctly rotates another 3 by 3 matrix' do
@@ -47,7 +47,7 @@ RSpec.shared_examples '90 degrees left rotation' do
                ['B', 'E', 'H'],
                ['A', 'D', 'G']]
 
-    expect(create(matrix).rotate_left).to eq rotated
+    expect(rotated_left(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 4 by 4 matrix' do
@@ -61,7 +61,7 @@ RSpec.shared_examples '90 degrees left rotation' do
                [2, 6, 10, 14],
                [1, 5,  9, 13]]
 
-    expect(create(matrix).rotate_left).to eq rotated
+    expect(rotated_left(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 5 by 5 matrix' do
@@ -77,7 +77,7 @@ RSpec.shared_examples '90 degrees left rotation' do
                ['B', 'G', 'L', 'Q', 'V'],
                ['A', 'F', 'K', 'P', 'U']]
 
-    expect(create(matrix).rotate_left).to eq rotated
+    expect(rotated_left(matrix)).to eq rotated
   end
 
 
@@ -96,7 +96,7 @@ RSpec.shared_examples '90 degrees left rotation' do
                [1,  7, 13, 19, 25, 31],
                [0,  6, 12, 18, 24, 30]]
 
-    expect(create(matrix).rotate_left).to eq rotated
+    expect(rotated_left(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 7 by 7 matrix' do
@@ -117,7 +117,7 @@ RSpec.shared_examples '90 degrees left rotation' do
                [1,  8, 15, 22, 29, 36, 43],
                [0,  7, 14, 21, 28, 35, 42]]
 
-    expect(create(matrix).rotate_left).to eq rotated
+    expect(rotated_left(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 8 by 8 matrix' do
@@ -139,7 +139,7 @@ RSpec.shared_examples '90 degrees left rotation' do
                [1,  9, 17, 25, 33, 41, 49, 57],
                [0,  8, 16, 24, 32, 40, 48, 56]]
 
-    expect(create(matrix).rotate_left).to eq rotated
+    expect(rotated_left(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 9 by 9 matrix' do
@@ -163,7 +163,7 @@ RSpec.shared_examples '90 degrees left rotation' do
                [1, 10, 19, 28, 37, 46, 55, 64, 73],
                [0,  9, 18, 27, 36, 45, 54, 63, 72]]
 
-    expect(create(matrix).rotate_left).to eq rotated
+    expect(rotated_left(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 10 by 10 matrix' do
@@ -189,6 +189,6 @@ RSpec.shared_examples '90 degrees left rotation' do
                [1, 11, 21, 31, 41, 51, 61, 71, 81, 91],
                [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]]
 
-    expect(create(matrix).rotate_left).to eq rotated
+    expect(rotated_left(matrix)).to eq rotated
   end
 end

@@ -2,8 +2,8 @@
 
 RSpec.shared_examples '90 degrees right rotation' do
 
-  def create(matrix)
-    described_class.new(matrix)
+  def rotated_right(matrix)
+    described_class.new(matrix).rotate_right.to_a
   end
 
   it 'correctly rotates a 2 by 2 matrix' do
@@ -12,8 +12,7 @@ RSpec.shared_examples '90 degrees right rotation' do
 
     rotated = [[3, 1],
                [4, 2]]
-
-    expect(create(matrix).rotate_right).to eq rotated
+    expect(rotated_right(matrix)).to eq rotated
   end
 
   it 'correctly rotates a different 2 by 2 matrix' do
@@ -23,7 +22,7 @@ RSpec.shared_examples '90 degrees right rotation' do
     rotated = [['C', 'A'],
                ['D', 'B']]
 
-    expect(create(matrix).rotate_right).to eq rotated
+    expect(rotated_right(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 3 by 3 matrix' do
@@ -35,7 +34,7 @@ RSpec.shared_examples '90 degrees right rotation' do
                [8, 5, 2],
                [9, 6, 3]]
 
-    expect(create(matrix).rotate_right).to eq rotated
+    expect(rotated_right(matrix)).to eq rotated
   end
 
   it 'correctly rotates another 3 by 3 matrix' do
@@ -47,7 +46,7 @@ RSpec.shared_examples '90 degrees right rotation' do
                ['H', 'E', 'B'],
                ['I', 'F', 'C']]
 
-    expect(create(matrix).rotate_right).to eq rotated
+    expect(rotated_right(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 4 by 4 matrix' do
@@ -61,7 +60,7 @@ RSpec.shared_examples '90 degrees right rotation' do
                [15, 11,  7,  3],
                [16, 12,  8,  4]]
 
-    expect(create(matrix).rotate_right).to eq rotated
+    expect(rotated_right(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 5 by 5 matrix' do
@@ -77,7 +76,7 @@ RSpec.shared_examples '90 degrees right rotation' do
                ['Y', 'S', 'N', 'I', 'D'],
                ['Z', 'T', 'O', 'J', 'E']]
 
-    expect(create(matrix).rotate_right).to eq rotated
+    expect(rotated_right(matrix)).to eq rotated
   end
 
 
@@ -96,7 +95,7 @@ RSpec.shared_examples '90 degrees right rotation' do
                [34, 28, 22, 16, 10, 4],
                [35, 29, 23, 17, 11, 5]]
 
-    expect(create(matrix).rotate_right).to eq rotated
+    expect(rotated_right(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 7 by 7 matrix' do
@@ -117,7 +116,7 @@ RSpec.shared_examples '90 degrees right rotation' do
                [47, 40, 33, 26, 19, 12, 5],
                [48, 41, 34, 27, 20, 13, 6]]
 
-    expect(create(matrix).rotate_right).to eq rotated
+    expect(rotated_right(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 8 by 8 matrix' do
@@ -139,7 +138,7 @@ RSpec.shared_examples '90 degrees right rotation' do
                [62, 54, 46, 38, 30, 22, 14, 6],
                [63, 55, 47, 39, 31, 23, 15, 7]]
 
-    expect(create(matrix).rotate_right).to eq rotated
+    expect(rotated_right(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 9 by 9 matrix' do
@@ -163,7 +162,7 @@ RSpec.shared_examples '90 degrees right rotation' do
                [79, 70, 61, 52, 43, 34, 25, 16, 7],
                [80, 71, 62, 53, 44, 35, 26, 17, 8]]
 
-    expect(create(matrix).rotate_right).to eq rotated
+    expect(rotated_right(matrix)).to eq rotated
   end
 
   it 'correctly rotates a 10 by 10 matrix' do
@@ -189,6 +188,6 @@ RSpec.shared_examples '90 degrees right rotation' do
                [98, 88, 78, 68, 58, 48, 38, 28, 18, 8],
                [99, 89, 79, 69, 59, 49, 39, 29, 19, 9]]
 
-    expect(create(matrix).rotate_right).to eq rotated
+    expect(rotated_right(matrix)).to eq rotated
   end
 end

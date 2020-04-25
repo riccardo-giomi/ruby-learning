@@ -28,7 +28,7 @@ class MyMatrix
         block.call(row, col) unless middle
       end
     end
-    @matrix
+    self
   end
 
   def rotate_four_right(row, col)
