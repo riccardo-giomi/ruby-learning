@@ -1,4 +1,4 @@
-class MyMatrix
+class RotateMatrix
 
   attr_reader :matrix
   def initialize(matrix)
@@ -8,6 +8,12 @@ class MyMatrix
   alias_method :to_a,   :matrix
   alias_method :to_ary, :matrix
 
+  def call(dir: :right)
+    dir == :right ? rotate_right : rotate_left
+  end
+
+  private
+
   def rotate_right
     rotate do |row, col| rotate_four_right(row, col) end
   end
@@ -15,8 +21,6 @@ class MyMatrix
   def rotate_left
     rotate do |row, col| rotate_four_left(row, col) end
   end
-
-  private
 
   def rotate(&block)
     max_col = max_row = n / 2

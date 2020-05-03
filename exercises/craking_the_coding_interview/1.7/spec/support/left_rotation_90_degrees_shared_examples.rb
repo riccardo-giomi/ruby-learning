@@ -3,7 +3,7 @@
 RSpec.shared_examples '90 degrees left rotation' do
 
   def rotated_left(matrix)
-    described_class.new(matrix).rotate_left.to_a
+    described_class.new(matrix).call(dir: :left).to_a
   end
 
   it 'correctly rotates a 2 by 2 matrix' do
