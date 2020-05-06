@@ -8,7 +8,7 @@ class Bottles
   end
 
   def verses(from, to)
-    (to..from).reduce([]) { |s, i| s.unshift(verse(i)) }.join("\n")
+    from.downto(to).map { |n| verse(n) }.join("\n")
   end
 
   def song
