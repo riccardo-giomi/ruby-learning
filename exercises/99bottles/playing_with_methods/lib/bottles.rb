@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class Bottles
+  attr_reader :beverage
+
+  def initialize(beverage: 'beer')
+    @beverage = beverage
+  end
+
   def verse(bottles)
     __send__("verse_#{bottles}")
   rescue NoMethodError
@@ -15,31 +21,36 @@ class Bottles
     verses(99, 0)
   end
 
-  def verse_n(n)
-    <<~VERSE
-      #{n} bottles of beer on the wall, #{n} bottles of beer.
-      Take one down and pass it around, #{n - 1} bottles of beer on the wall.
-    VERSE
-  end
+  private
 
   def verse_0
     <<~VERSE
-      No more bottles of beer on the wall, no more bottles of beer.
-      Go to the store and buy some more, 99 bottles of beer on the wall.
+      #{bottles_on_the_wall(0).capitalize}, #{bottles(0)}.
+      Go to the store and buy some more, #{bottles_on_the_wall(99)}.
     VERSE
   end
 
-  def verse_1
+  def verse_n(n)
     <<~VERSE
-      1 bottle of beer on the wall, 1 bottle of beer.
-      Take it down and pass it around, no more bottles of beer on the wall.
+      #{bottles_on_the_wall(n)}, #{bottles(n)}.
+      #{take_and_pass(n)}, #{bottles_on_the_wall(n - 1)}.
     VERSE
   end
 
-  def verse_2
-    <<~VERSE
-      2 bottles of beer on the wall, 2 bottles of beer.
-      Take one down and pass it around, 1 bottle of beer on the wall.
-    VERSE
+  def bottles_on_the_wall(n)
+    "#{bottles(n)} on the wall"
+  end
+
+  def take_and_pass(n)
+    "Take #{n == 1 ? 'it' : 'one'} down and pass it around"
+  end
+
+  def bottles(n)
+    bottles = case n
+              when 0 then 'no more bottles'
+              when 1 then '1 bottle'
+              else        "#{n} bottles"
+              end
+    "#{bottles} of #{@beverage}"
   end
 end

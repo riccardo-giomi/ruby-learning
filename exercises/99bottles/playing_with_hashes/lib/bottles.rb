@@ -1,27 +1,21 @@
 # frozen_string_literal: true
 
 class Bottles
-  def initialize
+  attr_reader :beverage
+
+  def initialize(beverage: 'beer')
+    @beverage = beverage
+
     @verses = Hash.new do |hash, key|
       hash[key] = <<~VERSE
-        #{key} bottles of beer on the wall, #{key} bottles of beer.
-        Take one down and pass it around, #{key - 1} bottles of beer on the wall.
+        #{bottles_on_the_wall(key)}, #{bottles(key)}.
+        #{take_and_pass(key)}, #{bottles_on_the_wall(key - 1)}.
       VERSE
     end
 
     @verses[0] = <<~VERSE
-      No more bottles of beer on the wall, no more bottles of beer.
-      Go to the store and buy some more, 99 bottles of beer on the wall.
-    VERSE
-
-    @verses[1] = <<~VERSE
-      1 bottle of beer on the wall, 1 bottle of beer.
-      Take it down and pass it around, no more bottles of beer on the wall.
-    VERSE
-
-    @verses[2] = <<~VERSE
-      2 bottles of beer on the wall, 2 bottles of beer.
-      Take one down and pass it around, 1 bottle of beer on the wall.
+      #{bottles_on_the_wall(0).capitalize}, #{bottles(0)}.
+      Go to the store and buy some more, #{bottles_on_the_wall(99)}.
     VERSE
   end
 
@@ -35,5 +29,24 @@ class Bottles
 
   def song
     verses(99, 0)
+  end
+
+  private
+
+  def bottles_on_the_wall(n)
+    "#{bottles(n)} on the wall"
+  end
+
+  def take_and_pass(n)
+    "Take #{n == 1 ? 'it' : 'one'} down and pass it around"
+  end
+
+  def bottles(n)
+    bottles = case n
+              when 0 then 'no more bottles'
+              when 1 then '1 bottle'
+              else        "#{n} bottles"
+              end
+    "#{bottles} of #{@beverage}"
   end
 end
