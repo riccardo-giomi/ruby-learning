@@ -96,6 +96,16 @@ RSpec.describe ZeroMatrix do
 
         expect(zero_matrix.call(matrix)).to eq expected
       end
+
+      example do
+        matrix   = [[1, 2, 3],
+                    [0, 0, 6]]
+
+        expected = [[0, 0, 3],
+                    [0, 0, 0]]
+
+        expect(zero_matrix.call(matrix)).to eq expected
+      end
     end
   end
 

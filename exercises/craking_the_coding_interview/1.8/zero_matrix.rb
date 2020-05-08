@@ -4,8 +4,8 @@ class ZeroMatrix
 
     matrix.map! do |row|
       row_has_zeros = false
-      row.each_with_index do |col, j|
-        if col.zero?
+      row.each_with_index do |value, j|
+        if value.zero?
           row_has_zeros = true
           columns_with_zero << j
         end
