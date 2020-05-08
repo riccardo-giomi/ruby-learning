@@ -3,6 +3,12 @@ require '../zero_matrix'
 RSpec.describe ZeroMatrix do
   let(:zero_matrix) { ZeroMatrix.new }
 
+  context 'with an empty matrix or an empty array' do
+    specify do expect(zero_matrix.call([[]])).to eq [[]] end
+
+    specify do expect(zero_matrix.call([])).to eq [] end
+  end
+
   context 'with a single row' do
     context 'without zeros' do
       example do
