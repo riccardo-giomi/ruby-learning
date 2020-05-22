@@ -9,67 +9,43 @@ class RotateMatrix
   alias_method :to_ary, :matrix
 
   def call(dir: :right)
-    dir == :right ? rotate_right : rotate_left
-  end
-
-  private
-
-  def rotate_right
-    rotate do |row, col| rotate_four_right(row, col) end
-  end
-
-  def rotate_left
-    rotate do |row, col| rotate_four_left(row, col) end
-  end
-
-  def rotate(&block)
-    max_col = max_row = n / 2
-    max_col += 1 if n.odd?
-
-    for row in 0...max_row do
-      for col in 0...max_col do
-        middle = n.odd? && col == row && row == max_row
-        block.call(row, col) unless middle
-      end
-    end
+    rotate(dir) if n > 1
     self
   end
 
-  def rotate_four_right(row, col)
-    value = at(row, col)                  # starting point:
-    moves_to = [col, n - 1 - row]         # moves to top-right equivalent;
-    value = put_in(*moves_to, value)      # top-right equivalent element:
-    moves_to = [n - 1 - row, n - 1 - col] # moves to bottom-right equivalent;
-    value = put_in(*moves_to, value)      # bottom-right equivalent:
-    moves_to = [n - 1 - col, row]         # moves to bottom-left equivalent;
-    value = put_in(*moves_to, value)      # bottom-left equivalent:
-    moves_to = [row, col]                 # moves to the starting point;
-    put_in(*moves_to, value)
-  end
-
-  def rotate_four_left(row, col)
-    value = at(row, col)                  # starting point:
-    moves_to = [n - 1 - col, row]         # moves to bottom-left equivalent;
-    value = put_in(*moves_to, value)      # bottom-left equivalent:
-    moves_to = [n - 1 - row, n - 1 - col] # moves to bottom-right equivalent;
-    value = put_in(*moves_to, value)      # bottom-right equivalent:
-    moves_to = [col, n - 1 - row]         # moves to top-right equivalent;
-    value = put_in(*moves_to, value)      # top-right equivalent element:
-    moves_to = [row, col]                 # moves to the starting point;
-    put_in(*moves_to, value)
-  end
-
-  def put_in(row, col, value)
-    old_value = @matrix.dig(row, col)
-    @matrix[row][col] = value
-    old_value
-  end
+  private
 
   def n
     @matrix.size
   end
 
-  def at(x, y)
-    @matrix.dig(x, y)
+  def rotate(dir)
+    max_layers = n / 2
+    (0...max_layers).each { |layer| rotate_layer(layer, dir) }
+  end
+
+  def rotate_layer(layer, dir)
+    max_offset = n - 1 - 2 * layer
+    (0...max_offset).each do |offset| 
+      dir == :left ?  rotate_four_left(layer, offset) : rotate_four_right(layer, offset)
+    end
+  end
+
+  def rotate_four_left(layer, offset)
+    first, last = layer, n - 1 - layer
+    top_left_value                 = @matrix[first][first + offset] # save top-left
+    @matrix[first][first + offset] = @matrix[first + offset][last]  # top-right into top-left
+    @matrix[first + offset][last]  = @matrix[last][last - offset]   # bottom-right into top-left
+    @matrix[last][last - offset]   = @matrix[last - offset][first]  # bottom-left into bottom-right
+    @matrix[last - offset][first]  = top_left_value                 # saved top-left into bottom-left
+  end
+
+  def rotate_four_right(layer, offset)
+    first, last = layer, n - 1 - layer
+    top_left_value                 = @matrix[first][first + offset] # save top-left
+    @matrix[first][first + offset] = @matrix[last - offset][first]  # bottom-left into top-left
+    @matrix[last - offset][first]  = @matrix[last][last - offset]   # bottom-left into bottom-left
+    @matrix[last][last - offset]   = @matrix[first + offset][last]  # top-left into bottom-left
+    @matrix[first + offset][last]  = top_left_value                 # saved top-left into top-left
   end
 end
